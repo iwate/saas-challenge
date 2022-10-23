@@ -14,7 +14,6 @@ function useBackend (name) {
 }
 
 function App() {
-  const value = 'World';
   const data = useBackend('iwate');
 
   if (data.isLoading)
@@ -23,7 +22,7 @@ function App() {
   if (data.isError)
     return <div>An error occurred.</div>
   
-  return <div>Hello {data.message}</div>;
+  return <div>{data.message}</div>;
 }
 
 export default App;
