@@ -10,7 +10,7 @@ const createFetcher = token => {
 
 const ApiData = () => {
     const { data: session } = useSession()
-    const { data, error } = useSWR(`${ep}/api/HttpTrigger1?name=iwate`, createFetcher(session.idToken))
+    const { data, error } = useSWR(`${session.apiEp}/api/HttpTrigger1?name=iwate`, createFetcher(session.idToken))
     if (error) return <div>failed to load</div>
     if (!data) return <div>loading...</div>
     return <div>{data}</div>
