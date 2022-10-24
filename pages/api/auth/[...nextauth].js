@@ -25,6 +25,7 @@ export const authOptions = {
             // Send properties to the client, like an access_token from a provider
             console.log(token)
             session.idToken = token.idToken
+            session.apiEp = process.env.NEXT_PUBLIC_API_EP
             return session;
         }
     }
