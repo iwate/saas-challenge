@@ -1,7 +1,6 @@
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn } from "next-auth/react"
 import useSWR from "swr";
 
-const ep = process.env.NEXT_PUBLIC_API_EP
 const createFetcher = token => {
     const headers = new Headers();
     headers.append('Authorization', `Bearer ${token}`)
@@ -24,7 +23,7 @@ function HomePage() {
             <>
                 Signed in as {session.user.email} <br />
                 <ApiData/> <br/>
-                <button onClick={() => signOut()}>Sign out</button>
+                <button onClick={() => window.location = '/api/auth/logout'}>Sign out</button>
             </>
         )
     }
