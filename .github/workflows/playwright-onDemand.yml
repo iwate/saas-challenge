@@ -90,5 +90,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          gh api repos/${GITHUB_REPOSITORY}/dispatches \
+          gh api repos/iwate/intern-js-pipeline/dispatches \
               --raw-field event_type=rebuild-site
