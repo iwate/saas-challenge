@@ -64,7 +64,7 @@ jobs:
       if: always()
       uses: peaceiris/actions-gh-pages@v3.7.3
       with:
-        external_repository: mspnp/intern-js-pipeline
+        external_repository: iwate/intern-js-pipeline
         publish_branch: gh-pages
         personal_token: ${{ secrets.PAT_TOKEN }}
         publish_dir: ${{steps.download.outputs.download-path}}
