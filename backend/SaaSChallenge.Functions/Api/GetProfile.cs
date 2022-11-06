@@ -19,15 +19,14 @@ namespace SaaSChallenge.Functions.Api
         }
 
         [Function("GetProfile")]
-        public async Task<HttpResponseData> RunAsync([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequestData req, string oid)
+        public async Task<HttpResponseData> RunAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req, string oid)
         {
-            // var user = await _client.Users[oid].Request().Select("displayName,identities").GetAsync();
-            await Task.Delay(1);
+            var user = await _client.Users[oid].Request().Select("displayName,identities").GetAsync();
             var response = req.CreateResponse(HttpStatusCode.OK);
-            // await response.WriteAsJsonAsync(new {
-            //     name = user.DisplayName,
-            //     email = user.Identities.FirstOrDefault(identity => identity.SignInType == "emailAddress")?.IssuerAssignedId
-            // });
+            await response.WriteAsJsonAsync(new {
+                name = user.DisplayName,
+                email = user.Identities.FirstOrDefault(identity => identity.SignInType == "emailAddress")?.IssuerAssignedId
+            });
             return response;
         }
     }
