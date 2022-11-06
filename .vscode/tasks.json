@@ -1,25 +1,24 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
+    "version": "2.0.0",
+    "tasks": [
+        {
 			"label": "clean (functions)",
 			"command": "dotnet",
 			"args": [
 				"clean",
+                "${workspaceFolder}/backend/SaaSChallenge.Functions/",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
 			"type": "process",
-			"problemMatcher": "$msCompile",
-			"options": {
-				"cwd": "${workspaceFolder}/api"
-			}
+			"problemMatcher": "$msCompile"
 		},
 		{
 			"label": "build (functions)",
 			"command": "dotnet",
 			"args": [
 				"build",
+                "${workspaceFolder}/backend/SaaSChallenge.Functions/SaaSChallenge_Functions.csproj",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
@@ -29,32 +28,28 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"problemMatcher": "$msCompile",
-			"options": {
-				"cwd": "${workspaceFolder}/api"
-			}
+			"problemMatcher": "$msCompile"
 		},
 		{
 			"label": "clean release (functions)",
 			"command": "dotnet",
 			"args": [
 				"clean",
+                "${workspaceFolder}/backend/SaaSChallenge.Functions/",
 				"--configuration",
 				"Release",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
 			"type": "process",
-			"problemMatcher": "$msCompile",
-			"options": {
-				"cwd": "${workspaceFolder}/api"
-			}
+			"problemMatcher": "$msCompile"
 		},
 		{
 			"label": "publish (functions)",
 			"command": "dotnet",
 			"args": [
 				"publish",
+                "${workspaceFolder}/backend/SaaSChallenge.Functions/",
 				"--configuration",
 				"Release",
 				"/property:GenerateFullPaths=true",
@@ -62,20 +57,17 @@
 			],
 			"type": "process",
 			"dependsOn": "clean release (functions)",
-			"problemMatcher": "$msCompile",
-			"options": {
-				"cwd": "${workspaceFolder}/api"
-			}
+			"problemMatcher": "$msCompile"
 		},
 		{
 			"type": "func",
 			"dependsOn": "build (functions)",
 			"options": {
-				"cwd": "${workspaceFolder}/api/bin/Debug/net6.0"
+				"cwd": "${workspaceFolder}/backend/SaaSChallenge.Functions/bin/Debug/net6.0"
 			},
 			"command": "host start",
 			"isBackground": true,
 			"problemMatcher": "$func-dotnet-watch"
 		}
-	]
+    ]
 }

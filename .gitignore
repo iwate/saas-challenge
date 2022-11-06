@@ -25,3 +25,6 @@ yarn-error.log*
 /playwright-report/
 /playwright/.cache/
 .next/*
+
+__azurite_*
+__blobstorage__
