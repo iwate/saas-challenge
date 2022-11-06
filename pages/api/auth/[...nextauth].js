@@ -8,7 +8,7 @@ export const authOptions = {
             clientId: process.env.AZURE_AD_B2C_CLIENT_ID,
             clientSecret: process.env.AZURE_AD_B2C_CLIENT_SECRET,
             primaryUserFlow: process.env.AZURE_AD_B2C_PRIMARY_USER_FLOW,
-            authorization: { params: { scope: "offline_access openid https://graph.microsoft.com/User.Read" } },
+            authorization: { params: { scope: "offline_access openid" } },
         })
         // ...add more providers here
     ],
@@ -16,12 +16,14 @@ export const authOptions = {
         async jwt({ token, account }) {
             // Persist the OAuth access_token to the token right after signin
             if (account) {
+                token.oid = account.providerAccountId
                 token.idToken = account.id_token
             }
             return token
           },
         async session({ session, token, user }) {
             // Send properties to the client, like an access_token from a provider
+            session.oid = token.oid;
             session.idToken = token.idToken
             session.apiEp = process.env.NEXT_PUBLIC_API_EP
             return session;

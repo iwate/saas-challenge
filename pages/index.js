@@ -1,15 +1,15 @@
 import { useSession, signIn } from "next-auth/react"
 import useSWR from "swr";
 
-const createFetcher = token => {
+const fetcher = (url, token) => {
     const headers = new Headers();
     headers.append('Authorization', `Bearer ${token}`)
-    return async (url) => fetch(url, { headers, mode: "cors" }).then(res => res.text())
+    return fetch(url, { headers, mode: "cors" }).then(res => res.text())
 }
 
 const ApiData = () => {
     const { data: session } = useSession()
-    const { data, error } = useSWR(`${session.apiEp}/api/HttpTrigger1?name=iwate`, createFetcher(session.idToken))
+    const { data, error } = useSWR([`${session.apiEp}/api/GetProfile?oid=${session.oid}`, session.idToken], fetcher)
     if (error) return <div>failed to load</div>
     if (!data) return <div>loading...</div>
     return <div>{data}</div>
